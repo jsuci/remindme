@@ -1,0 +1,90 @@
+* {
+    box-sizing: border-box;
+}
+
+html, body {
+    margin: 0;
+    padding: 0;
+    font-family: Verdana, sans-serif;
+    background: #98b1f3;
+}
+
+.invalid {
+    font-size: 12px;
+    color: red;
+    font-style: italic;
+    margin: 15px 0 0 0px;}
+
+/* Main Section Styling */
+.login {
+    padding: 15px;
+    max-width: 480px;
+    width: 100%;
+    margin: 60px auto;
+}
+
+.login img {
+    max-width: 300px;
+    width: 100%;
+    margin: 0px auto;
+}
+
+.login .group {
+    margin-bottom: 15px;
+    display: flex;
+    flex-direction: column;
+}
+
+.login .sep {
+    height: 2px;
+    margin: 30px 0 15px 0;
+    background: rgb(183 183 183 / 30%);
+}
+
+.login .reg {
+    text-align: center;
+    font-size: 12px;
+    color: #000;
+}
+
+.login .group .label {
+    color: rgb(36, 36, 36);
+    font-size: 12px;
+    text-transform: uppercase;
+    margin-bottom: 9px;
+}
+
+.login .show {
+    color: rgb(36, 36, 36);
+    font-size: 12px;
+    text-transform: uppercase;
+    margin-top: -6px;
+}
+
+.login .show .c-box {
+    width: 15px;
+    height: 15px;
+    vertical-align: sub;
+}
+
+.login .group .input,
+.login .group .button {
+    border: none;
+    padding: 15px 21px;
+    border-radius: 18px;
+    background: #fff;
+    color: #000;
+    outline: none;
+}
+
+.login .group input:focus {
+    border: 2px solid #326ded;
+ }
+
+.login .group .button {
+    background: #326ded;
+    color: #fff;
+    margin-top: 15px;
+    cursor: pointer;
+    text-transform: uppercase;
+}
