@@ -9,17 +9,51 @@ html, body {
     background: #98b1f3;
 }
 
-.invalid {
-    font-size: 12px;
-    color: red;
-    font-style: italic;
-    margin: 15px 0 0 0px;}
 
 /* Main Section Styling */
+.group {
+    margin-bottom: 15px;
+    display: flex;
+    flex-direction: column;
+}
+
+.group .label {
+    color: #000;
+    font-size: 18px;
+    margin-bottom: 9px;
+    margin-left: 12px;
+}
+
+.group .input, textarea {
+    border: none;
+    padding: 15px 21px;
+    border-radius: 18px;
+    background: #fff;
+    color: #000;
+    outline: none;
+}
+
+.group .button {
+    background: #326ded;
+    color: #fff;
+    margin-top: 15px;
+    cursor: pointer;
+    text-transform: uppercase;
+    padding: 15px 21px;
+    outline: none;
+    border-radius: 18px;
+    border: none;
+    font-size: 18px;
+}
+
+.group input:focus {
+    border: 3px solid #608ef1;
+ }
+
+
 .login {
     padding: 15px;
     max-width: 480px;
-    width: 100%;
     margin: 60px auto;
 }
 
@@ -29,16 +63,8 @@ html, body {
     margin: 0px auto;
 }
 
-.login .group {
-    margin-bottom: 15px;
-    display: flex;
-    flex-direction: column;
-}
-
 .login .sep {
-    height: 2px;
     margin: 30px 0 15px 0;
-    background: rgb(183 183 183 / 30%);
 }
 
 .login .reg {
@@ -47,18 +73,12 @@ html, body {
     color: #000;
 }
 
-.login .group .label {
-    color: rgb(36, 36, 36);
-    font-size: 12px;
-    text-transform: uppercase;
-    margin-bottom: 9px;
-}
-
 .login .show {
-    color: rgb(36, 36, 36);
-    font-size: 12px;
+    color: rgb(0 0 0 / 60%);
+    font-size: 9px;
+    margin-top: -3px;
     text-transform: uppercase;
-    margin-top: -6px;
+    font-weight: bold;
 }
 
 .login .show .c-box {
@@ -67,24 +87,234 @@ html, body {
     vertical-align: sub;
 }
 
-.login .group .input,
-.login .group .button {
-    border: none;
-    padding: 15px 21px;
-    border-radius: 18px;
-    background: #fff;
-    color: #000;
-    outline: none;
+
+.validation {
+    font-size: 12px;
+    font-style: italic;
+    font-weight: bold;
+    margin: 15px 0 0 0px;
 }
 
-.login .group input:focus {
-    border: 2px solid #326ded;
- }
+.validation .invalid {
+    color: #900404;
+}
 
-.login .group .button {
-    background: #326ded;
-    color: #fff;
-    margin-top: 15px;
+.validation .success {
+    color: #087d00;
+}
+
+
+/* Hamburger  */
+nav #menuToggle {
+    display: block;
+    position: fixed;
+    top: 30px;
+    left: 30px;
+    
+    z-index: 1;
+    
+    -webkit-user-select: none;
+    user-select: none;
+}
+
+nav #menuToggle input {
+    display: block;
+    width: 40px;
+    height: 32px;
+    position: absolute;
+    top: -7px;
+    left: -5px;
+    
     cursor: pointer;
-    text-transform: uppercase;
+    
+    opacity: 0;
+    z-index: 2;
+    
+    -webkit-touch-callout: none;
+}
+
+nav #menuToggle span {
+    display: block;
+    width: 33px;
+    height: 4px;
+    margin-bottom: 5px;
+    position: relative;
+    
+    background: rgb(41, 41, 41);
+    border-radius: 3px;
+    
+    z-index: 1;
+    
+    transform-origin: 4px 0px;
+    
+    transition: transform 0.5s cubic-bezier(0.77,0.2,0.05,1.0),
+                background 0.5s cubic-bezier(0.77,0.2,0.05,1.0),
+                opacity 0.55s ease;
+}
+
+
+nav #menuToggle span:first-child {
+  transform-origin: 0% 0%;
+}
+
+nav #menuToggle span:nth-last-child(2) {
+  transform-origin: 0% 100%;
+}
+
+nav #menuToggle input:checked ~ span {
+    opacity: 1;
+    transform: rotate(45deg) translate(-2px, -1px);
+    background: rgb(226, 226, 226);
+}
+
+#menuToggle input:checked ~ span:nth-last-child(3) {
+    opacity: 0;
+    transform: rotate(0deg) scale(0.2, 0.2);
+}
+
+#menuToggle input:checked ~ span:nth-last-child(2) {
+    transform: rotate(-45deg) translate(0, -1px);
+}
+
+
+nav #menu {
+    position: fixed;
+    top: 0;
+    width: 240px;
+    max-width: 100%;
+    height: 100%;
+    margin: 0px 0 0 -30px;
+    padding: 90px 50px 50px 30px;
+    
+    background: #000000c5;
+    list-style-type: none;
+    -webkit-font-smoothing: antialiased;
+    
+    transform-origin: 0% 0%;
+    transform: translate(-100%, 0);
+    
+    transition: transform 0.5s cubic-bezier(0.77,0.2,0.05,1.0);
+}
+
+nav #menu a {
+    text-decoration: none;
+    color: rgb(226, 226, 226);
+    
+    transition: color 0.3s ease;
+}
+
+nav #menu a:hover {
+  color: tomato;
+}
+
+nav #menu li {
+    padding: 10px 0;
+    font-size: 22px;
+}
+
+nav #menuToggle input:checked ~ ul {
+    transform: none;
+}
+
+/* Main Styles */
+main {
+    display: flex;
+    flex-flow: column nowrap;
+    justify-content: center;
+    align-items: center;
+    padding: 30px;
+}
+
+/* New Note Form */
+form {
+    width: 100%;
+    max-width: 620px;
+    margin-top: 60px;
+}
+
+.new_note .input {
+    font-size: 18px;
+}
+
+.new_note textarea {
+    height: 120px;	
+	resize: none; 
+	overflow: auto;
+    font-size: 18px;
+}
+
+.new_note textarea:focus {
+    border: solid 3px #608ef1;
+}
+
+/* Display Notes */
+
+.ncontainer {
+    width: 100%;
+    max-width: 620px;
+}
+
+
+.entry {
+    background-color: rgb(245 240 112);
+    padding: 15px 21px;
+    margin-top: 30px;
+    border-radius: 15px;
+    display: flex;
+    flex-flow: row nowrap;
+    justify-content: space-between;
+    overflow-wrap: anywhere;
+}
+
+.entry .title {
+    font-size: 21px;
+    text-decoration: underline;
+}
+
+.date-pub {
+    font-size: 12px;
+    margin-top: 6px;
+    font-style: italic;
+}
+
+.controls {
+    display: flex;
+    flex-flow: column nowrap;
+    justify-content: space-between;
+    align-items: stretch;
+}
+
+.icons {
+    opacity: 45%;
+    width: 21px;
+    height: 21px;
+}
+
+.icons:hover {
+    opacity: 100%;
+    cursor: pointer;
+
+}
+
+div #bin {
+    background: url('../img/bin.svg');
+}
+
+div #bell {
+    background: url('../img/bell.svg');
+}
+
+div #pen {
+    background: url('../img/pen.svg');
+}
+
+div #save {
+    background: url('../img/save.svg');
+}
+
+[contenteditable] {
+    outline: 0px solid transparent;
+    border: 2px dotted black;
+    border-radius: 6px;
+    padding: 9px;
 }

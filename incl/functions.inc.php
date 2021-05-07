@@ -1,5 +1,6 @@
 <?php
 
+// login, logout, signup functions
 function empty_signup($email, $password, $confirmPass)
 {
     if (empty($email) || empty($password) || empty($confirmPass)) {
@@ -117,10 +118,107 @@ function login_user($conn, $email, $password)
     } else {
         session_start();
         $_SESSION["user_id"] = $userExists["user_id"];
-        $_SESSION["user_email"] = $userExists["email"];
 
         /* redirect to dashboard */
         header("location: ../dashboard.php");
         exit();
     }
+}
+
+
+// dashboard functions
+function empty_note($title, $message)
+{
+
+    if (empty($title) || empty($message)) {
+        return true;
+    }
+
+    return false;
+}
+
+
+function create_note($conn, $title, $message, $userid)
+{
+    $sql = "INSERT INTO posts VALUES (NULL, ?, ?, ?, NULL, NULL, 'active');";
+
+    $stmt = mysqli_stmt_init($conn);
+
+    if (!mysqli_stmt_prepare($stmt, $sql)) {
+        header("location: ../dashboard.php?error=stmt_failed");
+        exit();
+    }
+
+    mysqli_stmt_bind_param($stmt, "sss", $userid, $title, $message);
+    mysqli_stmt_execute($stmt);
+    mysqli_stmt_close($stmt);
+
+    /* redirect to login */
+    header("location: ../dashboard.php?error=none");
+    exit();
+}
+
+function read_note($conn, $userid)
+{
+    $sql = "SELECT * FROM posts WHERE user_id = ? AND post_status = 'active' ORDER BY post_id DESC;";
+
+    $stmt = mysqli_stmt_init($conn);
+
+    if (!mysqli_stmt_prepare($stmt, $sql)) {
+        return false;
+    }
+
+    mysqli_stmt_bind_param($stmt, "s", $userid);
+    mysqli_stmt_execute($stmt);
+
+    $result = mysqli_stmt_get_result($stmt);
+    $result_count = mysqli_num_rows($result);
+
+    $entries = array();
+
+    if ($result_count > 0) {
+        while ($row = mysqli_fetch_assoc($result)) {
+            $entries[] = $row;
+        }
+    }
+
+    mysqli_stmt_close($stmt);
+
+    return $entries;
+}
+
+
+function delete_note($conn, $post_id)
+{
+    $sql = "UPDATE posts SET post_status = 'deleted' WHERE post_id = ?;";
+
+    $stmt = mysqli_stmt_init($conn);
+
+    if (!mysqli_stmt_prepare($stmt, $sql)) {
+        return false;
+    }
+
+    mysqli_stmt_bind_param($stmt, "s", $post_id);
+    mysqli_stmt_execute($stmt);
+    mysqli_stmt_close($stmt);
+
+    return true;
+}
+
+
+function update_note($conn, $post_id, $title, $message)
+{
+    $sql = "UPDATE posts SET title = ?, message  = ? WHERE post_id = ?;";
+
+    $stmt = mysqli_stmt_init($conn);
+
+    if (!mysqli_stmt_prepare($stmt, $sql)) {
+        return false;
+    }
+
+    mysqli_stmt_bind_param($stmt, "sss", $title, $message, $post_id);
+    mysqli_stmt_execute($stmt);
+    mysqli_stmt_close($stmt);
+
+    return true;
 }

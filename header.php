@@ -14,6 +14,8 @@
             echo "RemindMe | Register";
         } elseif ($_SERVER["REQUEST_URI"] === "/remindme/login.php") {
             echo "RemindMe | Login";
+        } else {
+            echo "RemindMe | Student Reminder App";
         }
         ?>
     </title>

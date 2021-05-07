@@ -27,21 +27,21 @@
                 <input type="checkbox" onclick="showPass()" class="c-box">Show Password
             </div>
 
-            <div class="invalid">
+            <div class="validation">
                 <?php
                 if (isset($_GET["error"])) {
                     if ($_GET["error"] === "empty_field") {
-                        echo "<p>Please fill in all the required fields.</p>";
+                        echo "<p class='invalid'>Please fill in all the required fields.</p>";
                     } else if ($_GET["error"] === "invalid_email") {
-                        echo "<p>Please enter a valid email address.</p>";
+                        echo "<p class='invalid'>Please enter a valid email address.</p>";
                     } else if ($_GET["error"] === "invalid_pass") {
-                        echo "<p>Password length must be at least 8 characters long.</p>";
+                        echo "<p class='invalid'>Password length must be at least 8 characters long.</p>";
                     } else if ($_GET["error"] === "pass_not_match") {
-                        echo "<p>Password do not match.</p>";
+                        echo "<p class='invalid'>Password do not match.</p>";
                     } else if ($_GET["error"] === "user_exists") {
-                        echo "<p>Email address already taken.</p>";
+                        echo "<p class='invalid'>Email address already taken.</p>";
                     } else {
-                        echo '<p style="color:green;">Registration successful. <a href="login.php">Click here to login</a>';
+                        echo "<p class='success'>Registration successful. <a href='login.php'>Click here to login</a>";
                     }
                 }
                 ?>

@@ -18,22 +18,23 @@
             </div>
 
             <div class="show">
-                <input type="checkbox" onclick="showPass()" class="c-box">Show Password
+                <input type="checkbox" onclick="showPass()" class="c-box">
+                Show Password
             </div>
 
-            <div class="invalid">
+            <div class="validation">
                 <?php
                 if (isset($_GET["error"])) {
                     if ($_GET["error"] === "empty_field") {
-                        echo "<p>Please fill in all the required fields.</p>";
+                        echo "<p class='invalid'>Please fill in all the required fields.</p>";
                     }
 
                     if ($_GET["error"] === "invalid_login") {
-                        echo "<p>Invalid credentials. <a href='signup.php'>Click here to sign up.</a></p>";
+                        echo "<p class='invalid'>Invalid credentials. <a href='signup.php'>Click here to sign up.</a></p>";
                     }
 
                     if ($_GET["error"] === "invalid_password") {
-                        echo "<p>Password incorrect.</p>";
+                        echo "<p class='invalid'>Password incorrect.</p>";
                     }
                 }
                 ?>

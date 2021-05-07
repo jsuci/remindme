@@ -1,9 +1,9 @@
-<?php include "header.php" ?>
+<?
 
-<?php
+include "header.php";
 
-if (isset($_SESSION["user_email"])) {
-    header("location: dashboard.php");
+if (isset($_SESSION["user_id"])) {
+    header("Location: dashboard.php");
     exit();
 } else {
     header("Location: login.php");
