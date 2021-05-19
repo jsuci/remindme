@@ -140,7 +140,7 @@ function empty_note($title, $message)
 
 function create_note($conn, $title, $message, $userid)
 {
-    $sql = "INSERT INTO posts VALUES (NULL, ?, ?, ?, NULL, NULL, 'active');";
+    $sql = "INSERT INTO posts VALUES (NULL, ?, ?, ?, NULL, NULL, 'active', NULL);";
 
     $stmt = mysqli_stmt_init($conn);
 

@@ -8,6 +8,7 @@ if (!isset($_SESSION["user_id"])) {
     exit();
 }
 
+
 ?>
 
 <nav>
@@ -30,7 +31,7 @@ if (!isset($_SESSION["user_id"])) {
 </nav>
 
 <main>
-    <form action="incl/dashboard.inc.php" method="post">
+    <form action="incl/dashboard.inc.php" method="post" class="dashboard">
         <div class="new_note">
             <div class="group">
                 <label for="title" class="label">Title*</label>
@@ -79,10 +80,11 @@ if (!isset($_SESSION["user_id"])) {
 
             if ($entries) {
                 foreach ($entries as $entry) {
-                    echo '<div class="entry" id=e' . $entry["post_id"] . '><div class="text"><div class="title">' . $entry["title"] . '</div><div class="date-pub">' . $entry["date_start"] . '</div><div class="message"><p>' . $entry["message"] . '</p></div></div><div class="controls"><a href="incl/dashboard.inc.php?delete=' . $entry["post_id"] . '"><div class="icons" id="bin"></div></a><a href="javascript:void(0);" onclick="saveNote(' . $entry["post_id"] . ')"><div class="icons" id="save"></div></a><a href="javascript:void(0);" onclick="editNote(' . $entry["post_id"] . ')"><div class="icons" id="pen"></div></a></div></div>';
+
+                    echo '<div class="entry" id=e' . $entry["post_id"] . '><div class="text"><div class="title">' . $entry["title"] . '<span id="timer"></span></div><hr class="solid"><div class="date-pub">' . $entry["date_modified"] . '</div><div class="message"><p>' . $entry["message"] . '</p></div></div><div class="controls"><a href="javascript:void(0);" onclick="setTimer(' . $entry["post_id"] . ')"><div class="icons" id="bell"></div></a><a href="incl/dashboard.inc.php?delete=' . $entry["post_id"] . '"><div class="icons" id="bin"></div></a><a href="javascript:void(0);" onclick="saveNote(' . $entry["post_id"] . ')"><div class="icons" id="save"></div></a><a href="javascript:void(0);" onclick="editNote(' . $entry["post_id"] . ')"><div class="icons" id="pen"></div></a></div></div>';
                 }
             } else {
-                echo '<div class="validation"><p class="invalid">No notes show.</a></p></div>';
+                echo '<div class="validation"><p class="invalid">No notes to show.</a></p></div>';
             }
 
             ?>
