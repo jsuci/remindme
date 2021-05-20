@@ -316,6 +316,15 @@ div #save {
     background: url('../img/save.svg');
 }
 
+div #star {
+    background: url('../img/star.svg');
+}
+
+.selected {
+    opacity: 100%;
+    filter: invert(0.5) sepia(100) saturate(130) hue-rotate(0deg);
+}
+
 [contenteditable] {
     outline: 0px solid transparent;
     border: 2px dotted black;

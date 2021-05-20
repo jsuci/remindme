@@ -55,7 +55,7 @@ function saveNote(post_id) {
     xhttp.open("POST", `./incl/dashboard.inc.php`, true);
     xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
     xhttp.send(
-        `post_id=${post_id}&title=${title_text}&message=${title_message}`
+        `update_note=true&post_id=${post_id}&title=${title_text}&message=${title_message}`
     );
 
 
@@ -78,12 +78,12 @@ function setTimer(post_id) {
     var noteHTML = document.querySelector(".entry" + post_id);
 
     // check if not a number
-    if (isNaN(user_input) || user_input == 0) {
+    if (isNaN(user_input) || user_input == 0 || user_input == null) {
         alert("Enter valid time only.");
         return; // stops function if true
     }
 
-    secondsRemaining = user_input;
+    secondsRemaining = user_input * 60;
 
     function tickTock() {
 
@@ -140,5 +140,62 @@ function setTimer(post_id) {
     }
 
     startTimer();
+}
 
+
+function addPriority(post_id) {
+    var e_post_id = "#e" + post_id
+
+    var starHTML = document.querySelector(e_post_id + " #star");
+
+
+    var xhttp = new XMLHttpRequest();
+
+    xhttp.onreadystatechange = function () {
+        if (this.readyState == 4 && this.status == 200) {
+            window.location.reload();
+        }
+    };
+
+    xhttp.open("POST", `./incl/dashboard.inc.php`, true);
+    xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+    xhttp.send(
+        `priority=true&post_id=${post_id}&status_message=top`
+    );
+
+
+    starHTML.innerHTML = '<div class="icons selected" id="star"></div>';
+}
+
+function removePriority(post_id) {
+    var e_post_id = "#e" + post_id
+
+    var starHTML = document.querySelector(e_post_id + " #star");
+
+    var xhttp = new XMLHttpRequest();
+
+    xhttp.onreadystatechange = function () {
+        if (this.readyState == 4 && this.status == 200) {
+            window.location.reload();
+        }
+    };
+
+    xhttp.open("POST", `./incl/dashboard.inc.php`, true);
+    xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+    xhttp.send(
+        `priority=true&post_id=${post_id}&status_message=active`
+    );
+
+    starHTML.innerHTML = '<div class="icons" id="star"></div>';
+}
+
+function setPriority(post_id) {
+    var e_post_id = "#e" + post_id;
+    starHTML = document.querySelector(e_post_id + " #star");
+
+    if (starHTML.classList.contains("selected")) {
+        removePriority(post_id);
+    } else {
+        addPriority(post_id);
+    }
 }

@@ -39,7 +39,7 @@ if (isset($_GET["delete"])) {
 }
 
 
-if (isset($_POST["post_id"])) {
+if (isset($_POST["update_note"])) {
 
     $post_id = $_POST["post_id"];
     $title = $_POST["title"];
@@ -49,6 +49,20 @@ if (isset($_POST["post_id"])) {
         header("location: ../dashboard.php");
     } else {
         header("location: ../dashboard.php?error=delete_post");
+    }
+
+    exit();
+}
+
+if (isset($_POST["priority"])) {
+
+    $post_id = $_POST["post_id"];
+    $status_message = $_POST["status_message"];
+
+    if (update_priority($conn, $post_id, $status_message) !== false) {
+        header("location: ../dashboard.php");
+    } else {
+        header("location: ../dashboard.php?error=update_priority");
     }
 
     exit();
